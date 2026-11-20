@@ -1,0 +1,30 @@
+{
+  "about": "Public keys of the agents that commit to this repository. Every commit is signed with one of these keys (git SSH signature) and names the session recorded here (Dinis, 19 November 2026 ~01:10 UTC).",
+  "keys": [
+    {
+      "id": "sha256:85248a9022612cd4",
+      "agent": "conductor.tools@AgentiCCells.dinis",
+      "label": "conductor.tools@AgentiCCells.dinis",
+      "role": "Conductor of the tools family (this hub and five tool sites). A session key: it ends with its session.",
+      "how": "Made by the agent in its own session on 19 November 2026 with sgit pki keygen; public bundle from sgit pki export. Only the public half is here.",
+      "created": "2026-11-19",
+      "status": "active",
+      "authorised": "Dinis, 2026-11-18 ~22:48 UTC: \"when we onboard a new session here, that session should create the public key and overwrite the public key. So it should take ownership\"",
+      "session": "https://claude.ai/code/session_01Kw9UwEYXqUkx1NF9iwAAWG",
+      "fingerprint": "sha256:85248a9022612cd4",
+      "signing_fingerprint": "sha256:b481885e19641a1c",
+      "bundle": {
+        "v": 1,
+        "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtnJ6QF8d67gow/gzspyQ\nSbmvkf2AAJKD/d3g4A9Dy4VI9y1rm0BOEpW5VD1A4Q0tAEKGVtZvenbd+WuymnqI\nlaJ0tgarw3zG/CzVeluUZedtU1F0jqSlHm4JoVlROKdaSYFgVvZqGnLi6f7fwd6i\nQd8Nt56mRbeAEaB2Krht+gkuVpWYaZPzAEJanj0iLgPEsEDiYo5U4mg1ok9B4jZN\n7HrwIOgZp6HpA6ZPLubjbebq0IGWnNUoS3K8X0okCs9cLkWaEOMIW8AeFviEHCJB\nK/osFLYhCid1Q9HFxamQU1x/5gmd1I33EkUFsCdCLLVxsdFHCsKxo58KDUxDxWy0\n/ukizc65AClr+6fQz/jK8aSXWW7ZqPeZMDg/F5SfjjmIwLjw8oaux9Ymfb1GdYqJ\nSGJxRtFKzdSzd2TCeVeZWctJnSflHhBd/QbcTtCfNgDFVSSENeOo76Z48kYsoySa\nzeC8dmv4XWh0axxnUT7fJnZX/4qzL7Hc2Gd53YAyhVG4agAjGZqtM0zWVVjqrLS6\nvhzDUaM1SdfKwPiGB2OFh3w/iTkYhV/G++sjSGJNKqLIV4p2BqBQXIurVFcwp8RH\navEqHCfkwYNsVruTCAydFrFLzuFH7LqzwXPtBAFXZiU3Lj3HtKI2bm1XMkT/XF4c\n9wXcRmmxaJ2VxZpPW2iy8QMCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+        "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuaPeh7qugndnyAZmfXv+ohY+bLeS\nMl1zHvyPD+Sy0eBOjwWf3tg+COIO+fv8rCfWiEekV5nJe8n1EpGwb5ONWw==\n-----END PUBLIC KEY-----\n",
+        "label": "conductor.tools@AgentiCCells.dinis",
+        "fingerprint": "sha256:85248a9022612cd4",
+        "signing_fingerprint": "sha256:b481885e19641a1c"
+      },
+      "ssh_signing": {
+        "from": "bundle.sign",
+        "note": "Commits are signed with bundle.sign (ECDSA P-256) as an SSH signature, namespace git. scripts/check-signatures.mjs derives the OpenSSH form with ssh-keygen -i -m PKCS8."
+      }
+    }
+  ]
+}
