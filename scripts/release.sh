@@ -11,6 +11,19 @@ node scripts/build.mjs
 node scripts/validate.mjs
 node scripts/leak-scan.mjs
 node scripts/check-commits.mjs origin/dev HEAD
+# Signed commits and no symlinks, run from the base copy (origin/dev), as CI does.
+trusted() {
+  local dir; dir=$(mktemp -d)
+  for f in check-signatures.mjs check-symlinks.mjs; do
+    local src=origin/dev
+    git cat-file -e "$src:scripts/$f" 2>/dev/null || src=1d5c6bcfb7c478e3a32a81ee2e429ac184026887
+    [ "$(git ls-tree "$src" -- "scripts/$f" | cut -d' ' -f1)" = 100644 ] || { echo "scripts/$f at $src is not a plain file" >&2; return 1; }
+    git show "$src:scripts/$f" > "$dir/$f"
+  done
+  node "$dir/check-signatures.mjs" origin/dev HEAD
+  node "$dir/check-symlinks.mjs" origin/dev origin/dev HEAD --tree .
+}
+trusted
 for i in 1 2 3 4 5; do
   git fetch -q origin dev
   git rebase -q origin/dev
@@ -19,6 +32,7 @@ for i in 1 2 3 4 5; do
   node scripts/validate.mjs >/dev/null
   node scripts/leak-scan.mjs >/dev/null
   node scripts/check-commits.mjs origin/dev HEAD >/dev/null
+  trusted >/dev/null
   if git -c push.negotiate=true push -q origin HEAD:dev; then echo "released $(git rev-parse --short HEAD) to dev"; exit 0; fi
   sleep $((i * 3))
 done

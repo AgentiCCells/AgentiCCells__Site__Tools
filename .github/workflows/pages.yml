@@ -51,6 +51,28 @@ jobs:
         run: |
           last=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "$AFTER" 2>/dev/null || true)
           node scripts/check-commits.mjs "${last:-$BEFORE}" "$AFTER"
+      - name: Signed commits and no symlinks, checked by the base copy of each checker
+        # Control 7: the checkers run from the base (the last release tag, else the push's before),
+        # never from the pushed tree. Only when the base predates the checkers is the copy taken from
+        # CHECKER_COMMIT, the commit that added them (conductor.tools@, 2026-11-20).
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          CHECKER_COMMIT: 1d5c6bcfb7c478e3a32a81ee2e429ac184026887
+        run: |
+          base=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "$AFTER" 2>/dev/null || true)
+          base=${base:-$BEFORE}
+          if [ -z "$base" ] || echo "$base" | grep -qE '^0+$'; then echo "no base to check from" >&2; exit 1; fi
+          mkdir -p "$RUNNER_TEMP/trusted"
+          for f in check-signatures.mjs check-symlinks.mjs; do
+            src=$base; mode=$(git ls-tree "$src" -- "scripts/$f" | cut -d' ' -f1)
+            if [ -z "$mode" ]; then src=$CHECKER_COMMIT; mode=$(git ls-tree "$src" -- "scripts/$f" | cut -d' ' -f1); fi
+            if [ "$mode" != "100644" ]; then echo "refused: scripts/$f at $src is not a plain file ($mode)" >&2; exit 1; fi
+            git show "$src:scripts/$f" > "$RUNNER_TEMP/trusted/$f"
+            echo "scripts/$f from $src"
+          done
+          node "$RUNNER_TEMP/trusted/check-signatures.mjs" "$base" "$AFTER"
+          node "$RUNNER_TEMP/trusted/check-symlinks.mjs" "$base" "$base" "$AFTER" --tree .
       - run: node scripts/build.mjs
         env:
           SITE_VERSION: ${{ steps.version.outputs.version }}
