@@ -8,5 +8,5 @@
     { "slug": "ssh-keygen", "url": "https://ssh-keygen.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__SSH-Keygen" },
     { "slug": "image-tools", "url": "https://image-tools.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__Image-Tools" }
   ],
-  "tool_site_state": "Each tool site was created by the Site Factory at about 19:12 UTC on 19 Nov 2026 from the template. As of 20 Nov 2026 none holds its tool yet: this session could not attach those repositories."
+  "tool_site_state": "Each tool site was created by the Site Factory at about 19:12 UTC on 19 Nov 2026 from the template. As of 20 Nov 2026 the tools have not been added to these sites yet."
 }

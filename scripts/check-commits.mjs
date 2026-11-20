@@ -34,6 +34,8 @@ const agentShape = /^[a-z0-9]+(?:[.-][a-z0-9]+)*@agenticcells\.[a-z0-9][a-z0-9.-
 // "date": "YYYY-MM-DD" }]. Each entry names exactly one commit; malformed entries fail the check.
 const exempt = new Map();
 const EX = 'scripts/commit-exemptions.json';
+// In the tools hub no exemptions are allowed: a pushed tree could exempt a commit by name (conductor.tools@, 2026-11-20).
+if (existsSync(EX)) { console.error(`${EX}: exemptions are not allowed in this repository`); process.exit(1); }
 if (existsSync(EX)) {
   let list;
   try { list = JSON.parse(readFileSync(EX, 'utf8')); } catch (e) { console.error(`${EX}: not JSON (${e.message})`); process.exit(1); }

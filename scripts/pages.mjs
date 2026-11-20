@@ -94,7 +94,7 @@ page('/', 'Tools: free tools that run in your browser', 'An inventory of ' + inv
 <p class="lead">Free tools that each do one thing in your browser. Each one is getting its own site, with documentation on what it does, how it works, its limits and how to check what leaves your device.</p>
 <p class="promise">${PROMISE}</p>
 <h2>The first five</h2>
-<p>${esc(cfg.tool_site_state)} Source: <a href="https://github.com/AgentiCCells/AgentiCCells__Site__Factory/tree/dev/requests">the Site Factory requests</a>.</p>
+<p>${esc(cfg.tool_site_state)} Source: <a href="${repo}/blob/dev/REALITY.md">REALITY.md</a>.</p>
 <div class="grid">${cfg.tool_sites.map((s) => { const t = bySlug.get(s.slug); return `<div class="card"><h3>${esc(t.name)}</h3><p>${badge(t.status)}<span class="badge">tool not added yet</span></p><p>${esc(tidy(t.description))}</p><p class="muted"><a href="${s.url}">${esc(s.url.replace('https://', ''))}</a> · <a href="${t.manifest}">manifest</a></p></div>`; }).join('')}</div>
 <h2>All ${inv.count} tools</h2>
 <p class="muted">Generated from each tool's manifest.json in <a href="${inv.source}">SGraph-AI__Tools</a> at commit <a href="${inv.source}/tree/${inv.commit}">${short}</a>. Status and description are the manifest's own, as the upstream project gives them; em dashes are shown as commas. Some of these tools call outside services named in their descriptions (for example OpenRouter or SG/Send): each tool's own site will say so before anything leaves your device. A tool with no site yet links to its manifest. ${inv.skipped.filter((s) => s.reason.includes('"id"')).length} more tool folders use "id" instead of "slug" in their manifests and are not counted (${inv.skipped.filter((s) => s.reason.includes('"id"')).map((s) => esc(s.manifest.split('/').slice(-2, -1)[0])).join(', ')}).</p>
@@ -151,7 +151,7 @@ ${roles.map((r) => `<div class="card">${md(read(join('team', r, 'ROLE.md')))}${m
 <h2>How work flows</h2>
 ${md(read('team/WORKFLOW.md').replace(/^# .*\n/, ''))}
 <h2>Commit timeline</h2>
-<p class="muted">From git log of this repository at build time. The five tool site repositories are not shown yet: this session could not attach them (refused 19 Nov 2026).</p>
+<p class="muted">From git log of this repository at build time. The five tool sites have no commits from this team yet, so they are not shown.</p>
 <div class="scroll"><table><thead><tr><th>When (UTC)</th><th>Commit</th><th>What</th><th>Agent</th></tr></thead><tbody>${timeline.map(([h, d, s, a]) => `<tr><td>${esc((d || '').replace('T', ' ').slice(0, 16))}</td><td><a href="${repo}/commit/${esc(h)}"><code>${esc((h || '').slice(0, 7))}</code></a></td><td>${esc(s)}</td><td>${esc(a || 'none')}</td></tr>`).join('')}</tbody></table></div>
 <h2>Round reports</h2>
 ${rounds.length ? rounds.map((f) => `<div class="card">${md(read(join('team/rounds', f)))}</div>`).join('\n') : '<p>None yet.</p>'}
