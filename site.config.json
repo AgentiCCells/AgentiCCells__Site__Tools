@@ -1,0 +1,12 @@
+{
+  "about": "The one setting for where the hub lives. Change domain to move it (cells.b@, 20 Nov 2026: tools.sovereignweb.site is pending Dinis's decision). hub.json live_address must match; the validator checks it.",
+  "domain": "tools.agenticcells.site",
+  "tool_sites": [
+    { "slug": "video-recorder", "url": "https://video-recorder.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__Video-Recorder" },
+    { "slug": "file-encryptor", "url": "https://file-encryptor.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__File-Encryptor" },
+    { "slug": "heic-converter", "url": "https://heic-converter.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__HEIC-Converter" },
+    { "slug": "ssh-keygen", "url": "https://ssh-keygen.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__SSH-Keygen" },
+    { "slug": "image-tools", "url": "https://image-tools.agenticcells.site", "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__Image-Tools" }
+  ],
+  "tool_site_state": "Each tool site was created by the Site Factory at about 19:12 UTC on 19 Nov 2026 from the template. As of 20 Nov 2026 none holds its tool yet: this session could not attach those repositories."
+}

@@ -40,6 +40,17 @@ try {
   if (h.version_from !== `${h.live_address}/version.json`) fail(`hub.json: version_from must be ${h.live_address}/version.json (the hub copies it verbatim)`);
   if (h.owner !== 'AgentiCCells') fail('hub.json: owner must be AgentiCCells');
   if (!h.licence || h.licence.code !== 'Apache-2.0' || h.licence.text !== 'CC BY 4.0') fail('hub.json: licence must be code Apache-2.0, text CC BY 4.0');
-} catch (e) { fail(`hub.json is missing or not JSON (${e.message})`); }
+  // The domain is one setting (site.config.json); hub.json must agree with it (conductor.tools@, 2026-11-20).
+  const cfg = JSON.parse(readFileSync('site.config.json', 'utf8'));
+  if (h.live_address !== `https://${cfg.domain}`) fail(`hub.json: live_address must be https://${cfg.domain} (site.config.json domain)`);
+} catch (e) { fail(`hub.json or site.config.json is missing or not JSON (${e.message})`); }
+// Every page carries the no-tracking statement and a share card (brief, 19 Nov 2026).
+for (const f of files.filter((x) => x.endsWith('.html'))) {
+  const s = readFileSync(f, 'utf8');
+  if (!s.includes('No tracking, no analytics, no third-party scripts, no cookies, no ads.')) fail(`${f}: no no-tracking statement`);
+  if (!/<meta property="og:image" content="[^"]+share-card\.png"/.test(s)) fail(`${f}: no share card`);
+}
+if (!existsSync('_site/assets/share-card.png')) fail('no _site/assets/share-card.png');
+else if (statSync('_site/assets/share-card.png').size > 300 * 1024) fail('share card over 300 KB');
 if (problems.length) { console.error(problems.join('\n')); console.error(`FAILED: ${problems.length} problem(s)`); process.exit(1); }
 console.log(`OK${isTemplate ? ' (template)' : ''}`);

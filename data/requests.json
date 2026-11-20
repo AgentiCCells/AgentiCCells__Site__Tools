@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-20",
+  "how": "scripts/privacy-check.mjs: headless Chromium, fresh profile per page, the built site served locally; local URLs shown with the live origin",
+  "pages": [
+    {
+      "page": "/",
+      "ok": true,
+      "cookies": 0,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/",
+          "type": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/assets/site.css",
+          "type": "stylesheet"
+        }
+      ]
+    },
+    {
+      "page": "/how-to-check/",
+      "ok": true,
+      "cookies": 0,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/how-to-check/",
+          "type": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/assets/site.css",
+          "type": "stylesheet"
+        }
+      ]
+    },
+    {
+      "page": "/about/",
+      "ok": true,
+      "cookies": 0,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/about/",
+          "type": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/assets/site.css",
+          "type": "stylesheet"
+        }
+      ]
+    },
+    {
+      "page": "/behind-the-scenes/",
+      "ok": true,
+      "cookies": 0,
+      "requests": [
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/behind-the-scenes/",
+          "type": "document"
+        },
+        {
+          "method": "GET",
+          "url": "https://tools.agenticcells.site/assets/site.css",
+          "type": "stylesheet"
+        }
+      ]
+    }
+  ]
+}

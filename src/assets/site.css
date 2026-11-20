@@ -1,0 +1,31 @@
+/* Tools family design (designer.tools@AgentiCCells.dinis, 20 Nov 2026). CC BY 4.0.
+   Each site carries its own copy of this file: nothing is loaded from another site. */
+:root{--bg:#fbf8f2;--fg:#1f1d1a;--muted:#5f5a52;--line:#e3ddd2;--card:#ffffff;--accent:#1f6f5c;--accent-fg:#ffffff;--badge:#efe9de;--max:58rem}
+@media (prefers-color-scheme:dark){:root{--bg:#15130f;--fg:#ece8e1;--muted:#a59f95;--line:#2e2a24;--card:#1d1a16;--accent:#5cc0a3;--accent-fg:#0d1b17;--badge:#2a2620}}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+a{color:var(--accent)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1rem}
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:center;padding-top:.8rem;padding-bottom:.8rem}
+header.top .brand{font-weight:700;text-decoration:none;color:var(--fg)}
+header.top nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem;font-size:.95rem}
+main{padding:2rem 0 3rem}
+h1{font-size:2rem;line-height:1.2;margin:.2rem 0 1rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.05rem;margin:1.2rem 0 .3rem}
+.lead{font-size:1.1rem;color:var(--muted)}
+.promise{border:1px solid var(--line);background:var(--card);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:.8rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+.card h3{margin:0 0 .3rem}
+.card p{margin:.3rem 0;font-size:.93rem}
+.badge{display:inline-block;font-size:.75rem;padding:.05rem .5rem;border-radius:99px;background:var(--badge);color:var(--muted);margin-right:.3rem}
+.badge.live{background:var(--accent);color:var(--accent-fg)}
+.muted{color:var(--muted);font-size:.9rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:.35rem .5rem;border-bottom:1px solid var(--line);vertical-align:top}
+.scroll{overflow-x:auto}
+code,pre{font:.88em ui-monospace,SFMono-Regular,Menlo,monospace}
+pre{background:var(--card);border:1px solid var(--line);padding:.8rem;border-radius:6px;overflow-x:auto}
+footer.bottom{border-top:1px solid var(--line);padding:1.2rem 0 2rem;font-size:.9rem;color:var(--muted)}
