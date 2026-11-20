@@ -64,7 +64,7 @@ jobs:
           base=${base:-$BEFORE}
           if [ -z "$base" ] || echo "$base" | grep -qE '^0+$'; then echo "no base to check from" >&2; exit 1; fi
           mkdir -p "$RUNNER_TEMP/trusted"
-          for f in check-signatures.mjs check-symlinks.mjs; do
+          for f in check-signatures.mjs check-symlinks.mjs check-commits.mjs; do
             src=$base; mode=$(git ls-tree "$src" -- "scripts/$f" | cut -d' ' -f1)
             if [ -z "$mode" ]; then src=$CHECKER_COMMIT; mode=$(git ls-tree "$src" -- "scripts/$f" | cut -d' ' -f1); fi
             if [ "$mode" != "100644" ]; then echo "refused: scripts/$f at $src is not a plain file ($mode)" >&2; exit 1; fi
@@ -73,6 +73,7 @@ jobs:
           done
           node "$RUNNER_TEMP/trusted/check-signatures.mjs" "$base" "$AFTER"
           node "$RUNNER_TEMP/trusted/check-symlinks.mjs" "$base" "$base" "$AFTER" --tree .
+          node "$RUNNER_TEMP/trusted/check-commits.mjs" "$base" "$AFTER"
       - run: node scripts/build.mjs
         env:
           SITE_VERSION: ${{ steps.version.outputs.version }}

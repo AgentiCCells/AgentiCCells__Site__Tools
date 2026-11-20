@@ -1,7 +1,7 @@
 // The privacy reviewer's gate: serve _site/ on a local origin, load each page in headless Chromium,
 // record every network request and cookie, and fail if any request leaves the site's own origin.
 // Writes data/requests.json (shown on /how-to-check/). Needs Playwright with Chromium (dev only, not
-// a site dependency). Written by privacy-reviewer.tools@AgentiCCells.dinis, 2026-11-20. Apache-2.0.
+// a site dependency). Written by conductor.tools@AgentiCCells.dinis (for the privacy reviewer), 2026-11-20. Apache-2.0.
 // Usage: node scripts/privacy-check.mjs [--write]
 import { createServer } from 'node:http';
 import { readFileSync, existsSync, statSync, writeFileSync } from 'node:fs';

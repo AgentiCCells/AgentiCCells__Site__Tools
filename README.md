@@ -1,9 +1,9 @@
 # Tools
 
-Free tools that run entirely in your browser: no uploads, no servers, no tracking. This is the hub: it lists every tool in [SGraph-AI__Tools](https://github.com/the-cyber-boardroom/SGraph-AI__Tools) and links to each tool's own site as it is published.
+An inventory of browser tools, each getting its own documented site. This is the hub: it lists every tool in [SGraph-AI__Tools](https://github.com/the-cyber-boardroom/SGraph-AI__Tools) and links to each tool's own site as it is published.
 
 - Live at https://tools.agenticcells.site (version at /version.json). The domain is one setting: `domain` in `site.config.json`.
-- No tracking, no analytics, no third-party scripts, no cookies, no ads. Check it on the site's /how-to-check/ page.
+- This site has no tracking, no analytics, no third-party scripts, no cookies and no ads, and makes no requests to other hosts. Check it on the site's /how-to-check/ page. Some listed tools call outside services named in their descriptions; each tool's own site says so.
 - Made by the AgentiCCells tools team (see `team/`), instructed by Dinis Cruz, from request `requests/2026-11-19__tools/` in AgentiCCells__Site__Factory.
 
 ## How it is built
@@ -15,17 +15,17 @@ Free tools that run entirely in your browser: no uploads, no servers, no trackin
 
 ## Fork and run your own
 
-You need Node 22 and git. Nothing else: the site has no dependencies.
+You need Node 22 and git to build. The site itself has no dependencies. The signature check also needs `ssh-keygen` (OpenSSH 8.2 or later), and the privacy check needs Playwright with Chromium.
 
 1. **Fork** this repository on GitHub, or clone it: `git clone https://github.com/AgentiCCells/AgentiCCells__Site__Tools`.
 2. **Change** these:
    - `site.config.json`: `domain` (your host name) and `tool_sites` (the tool sites you link to).
-   - `hub.json`: `live_address`, `version_from`, `repository` and `owner` (the validator checks `owner` is AgentiCCells; change that line in `scripts/validate.mjs` for your own organisation).
+   - `hub.json`: `live_address`, `version_from`, `repository` and `owner`. The pages take the repository address for their source and commit links from `repository`. The validator checks `owner` is AgentiCCells; change that line in `scripts/validate.mjs` for your own organisation.
    - `src/assets/share-card.png`: the 1200x630 card shows the domain; make your own under 300 KB.
-   - `team/keys.json` and `.github/workflows/pages.yml`: the signed-commit check trusts only the keys listed there. Either publish your own key, or remove the signature step in your fork.
-3. **Build** and check: `node scripts/build.mjs && node scripts/validate.mjs && node scripts/leak-scan.mjs`. Open `_site/index.html`, or serve it: `npx serve _site` (or any static server).
+   - `team/keys.json`: the signed-commit check trusts only the keys listed there. Publish your own key (`sgit pki keygen`, then `sgit pki export`), commit it, and set `TRUSTED_BASE` in `scripts/check-signatures.mjs` and `CHECKER_COMMIT` in `scripts/release.sh` and `.github/workflows/pages.yml` to your commits.
+3. **Build** and check: `node scripts/build.mjs`, then `node scripts/privacy-check.mjs --write` (records the request list shown on /how-to-check/), then `node scripts/build.mjs` again, `node scripts/validate.mjs` and `node scripts/leak-scan.mjs`. Open `_site/index.html`, or serve it: `npx serve _site` (or any static server).
 4. **Refresh the inventory** (optional): clone SGraph-AI__Tools, check out the pinned commit, and run `node scripts/inventory.mjs <path>`.
-5. **Deploy**: any static host works, since `_site/` is plain files. On GitHub Pages, set Pages to "GitHub Actions" and push to `dev`; `.github/workflows/pages.yml` builds, checks and deploys.
+5. **Deploy**: any static host works, since `_site/` is plain files. On GitHub Pages, set Pages to "GitHub Actions", set your custom domain in the Pages settings with a CNAME record pointing to `<owner>.github.io`, and push to `dev`; `.github/workflows/pages.yml` builds, checks and deploys.
 
 ## Licences
 

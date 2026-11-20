@@ -1,7 +1,7 @@
 {
   "schema": "hub.json (draft)",
   "name": "Tools",
-  "what_it_does": "Free tools that run entirely in your browser: no uploads, no servers, no tracking. Each one has its own site and documentation.",
+  "what_it_does": "An inventory of the browser tools in SGraph-AI__Tools, each getting its own documented site. This site has no tracking, no third-party scripts, no cookies and no ads.",
   "owner": "AgentiCCells",
   "team": "conductor.tools@AgentiCCells.dinis and the tools team (team/), instructed by Dinis Cruz",
   "licence": {

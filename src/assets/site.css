@@ -1,4 +1,4 @@
-/* Tools family design (designer.tools@AgentiCCells.dinis, 20 Nov 2026). CC BY 4.0.
+/* Tools family design (conductor.tools@AgentiCCells.dinis, doing the designer's work, 20 Nov 2026). CC BY 4.0.
    Each site carries its own copy of this file: nothing is loaded from another site. */
 :root{--bg:#fbf8f2;--fg:#1f1d1a;--muted:#5f5a52;--line:#e3ddd2;--card:#ffffff;--accent:#1f6f5c;--accent-fg:#ffffff;--badge:#efe9de;--max:58rem}
 @media (prefers-color-scheme:dark){:root{--bg:#15130f;--fg:#ece8e1;--muted:#a59f95;--line:#2e2a24;--card:#1d1a16;--accent:#5cc0a3;--accent-fg:#0d1b17;--badge:#2a2620}}
@@ -11,9 +11,11 @@ header.top .wrap{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;align-items:cente
 header.top .brand{font-weight:700;text-decoration:none;color:var(--fg)}
 header.top nav{display:flex;flex-wrap:wrap;gap:.25rem 1rem;font-size:.95rem}
 main{padding:2rem 0 3rem}
+h1,h2,h3,h4,h5,.card,td{overflow-wrap:anywhere}
 h1{font-size:2rem;line-height:1.2;margin:.2rem 0 1rem}
 h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
 h3{font-size:1.05rem;margin:1.2rem 0 .3rem}
+h4,h5,h6{font-size:1rem;margin:.8rem 0 .2rem}
 .lead{font-size:1.1rem;color:var(--muted)}
 .promise{border:1px solid var(--line);background:var(--card);border-left:4px solid var(--accent);padding:.7rem 1rem;border-radius:6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:.8rem}

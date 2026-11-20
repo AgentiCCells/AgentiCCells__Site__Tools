@@ -8,7 +8,7 @@
 // ... every then commit is signed by that key ... you should also include the session ID".
 // Pattern: cyber.b@'s scripts/check-signatures.mjs in PrompTugal__News__Cyber (commit c8fff24, Apache-2.0, same team).
 //
-// Usage: node scripts/check-signatures.mjs <before> <after>   the range to check (run by plan.yml on pull requests)
+// Usage: node scripts/check-signatures.mjs <before> <after>   the range to check (run from the base copy by scripts/release.sh and .github/workflows/pages.yml)
 // For each commit in before..after (merges and side branches included) that is not an ancestor of the pinned
 // TRUSTED_BASE (control 8: a skip is decided only by git merge-base --is-ancestor, never by what a tree holds,
 // so deleting this file never skips a commit):

@@ -49,8 +49,21 @@ for (const f of files.filter((x) => x.endsWith('.html'))) {
   const s = readFileSync(f, 'utf8');
   if (!s.includes('No tracking, no analytics, no third-party scripts, no cookies, no ads.')) fail(`${f}: no no-tracking statement`);
   if (!/<meta property="og:image" content="[^"]+share-card\.png"/.test(s)) fail(`${f}: no share card`);
+  for (const k of ['og:title', 'og:description', 'og:url', 'og:image:alt']) if (!new RegExp(`<meta property="${k}" content="[^"]+"`).test(s)) fail(`${f}: no ${k}`);
 }
 if (!existsSync('_site/assets/share-card.png')) fail('no _site/assets/share-card.png');
-else if (statSync('_site/assets/share-card.png').size > 300 * 1024) fail('share card over 300 KB');
+else {
+  if (statSync('_site/assets/share-card.png').size > 300 * 1024) fail('share card over 300 KB');
+  const png = readFileSync('_site/assets/share-card.png');
+  if (png.readUInt32BE(16) !== 1200 || png.readUInt32BE(20) !== 630) fail('share card is not 1200x630');
+}
+// The published request list must cover every page and name only this site's domain (privacy-check.mjs --write refreshes it).
+try {
+  const cfg = JSON.parse(readFileSync('site.config.json', 'utf8'));
+  const req = JSON.parse(readFileSync('data/requests.json', 'utf8'));
+  const pages = files.filter((x) => x.endsWith('index.html')).map((x) => x.slice('_site'.length).replace(/index\.html$/, ''));
+  for (const p of pages) if (!req.pages.some((r) => r.page === p)) fail(`data/requests.json: no record for ${p}: run node scripts/privacy-check.mjs --write`);
+  for (const r of req.pages) { if (!r.ok) fail(`data/requests.json: ${r.page} failed the privacy check`); for (const q of r.requests) if (new URL(q.url).host !== cfg.domain) fail(`data/requests.json: ${q.url} is not on ${cfg.domain}`); }
+} catch (e) { fail(`data/requests.json: ${e.message}`); }
 if (problems.length) { console.error(problems.join('\n')); console.error(`FAILED: ${problems.length} problem(s)`); process.exit(1); }
 console.log(`OK${isTemplate ? ' (template)' : ''}`);
